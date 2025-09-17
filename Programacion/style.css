@@ -1,3 +1,7 @@
 h1 {
     color: rgb(255, 0, 0);
 }
+#languajes-list {
+    color: blue;
+    font-size: 20px;
+}
