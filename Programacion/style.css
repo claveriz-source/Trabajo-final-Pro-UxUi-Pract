@@ -6,5 +6,9 @@ h1 {
     border-radius: solid black;
 }
 .pantalla{
-    color: aqua;
+    color: red;
+}
+
+.pantalla{
+    height: 12px;
 }
