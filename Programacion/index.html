@@ -8,32 +8,17 @@
     <script></script>
 </head>
 <body>
-    <h1>Programacion</h1>
-    <h2>Lenguajes de Programacion</h2>
-    <a href="../index.html">Inicio</a>
-    <div class="card">
-        <div class="container">1</div>
-        <div class="container">2</div>
-        <div class="container">3</div>
-        <div class="container">4</div>
+    <h1>Calculadora de IMC</h1>
+    <div class="container">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ingrese su peso en kg">
     </div>
-<section class="formulario">
-    <h2>Formulario de Contacto</h2>
-    <form id="contactForm">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="message">Mensaje:</label>
-        <textarea id="message" name="message" required></textarea>
-        
-        <button type="submit">Enviar</button>
-    </form>
-    <div id="formResponse"></div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi autem repellendus totam, reprehenderit quasi deleniti voluptas blanditiis qui expedita sequi, soluta praesentium eos ducimus, sunt ipsa quia! Sunt, nostrum soluta?</p>
-</section>
+    <div class="container">
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" step="0.01" placeholder="Ingrese su altura en metros">
+    </div>
+    <button id="calcularBtn">Calcular IMC</button>
+    <div id="resultado"></div>
 </body>
 <script src="javascript.js"></script>
 </html>
