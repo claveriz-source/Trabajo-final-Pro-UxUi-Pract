@@ -18,3 +18,8 @@ h1 {
     margin: 20px auto;
     max-width: 400px;
 }
+
+.pantalla{
+    border-radius: solid red;
+    border-color: black;
+}
