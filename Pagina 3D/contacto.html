@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Contacto - Polo Norte</title>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="brand-logo" aria-hidden="true">
+                    <img src="imagenes/images.jpeg" alt="Logo Página 3D">
+                </span>
+                <span class="brand-text">Polo Norte</span>
+            </div>
+            <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="acerca.html">Acerca</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <button class="cart-toggle" aria-label="Ver carrito">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-count">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Contacto</h1>
+        <p class="subtitle">Escríbenos y te responderemos a la brevedad.</p>
+
+        <section style="margin-top:18px; max-width:700px;">
+            <form class="contact-form" action="#" onsubmit="alert('Formulario de ejemplo — implementar endpoint para envío real'); return false;">
+                <label>
+                    Nombre
+                    <input type="text" name="nombre" required>
+                </label>
+                <label>
+                    Email
+                    <input type="email" name="email" required>
+                </label>
+                <label>
+                    Mensaje
+                    <textarea name="mensaje" rows="6" required></textarea>
+                </label>
+                <button class="boton" type="submit">Enviar mensaje</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p>PoloNorte@example.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="acerca.html">Acerca</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Síguenos</h3>
+                <p>Instagram · Twitter · ArtStation</p>
+            </div>
+        </div>
+        <div class="site-copy">© 2025 Polo Norte</div>
+    </footer>
+    <script src="javaScript.js" defer></script>
+</body>
+</html>

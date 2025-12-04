@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gracias - Polo Norte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="nav-brand"><span class="brand-logo" aria-hidden="true"><img src="imagenes/images.jpeg" alt="Logo"></span><span class="brand-text">Polo Norte</span></div>
+      <ul class="nav-links"><li><a href="index.html">Inicio</a></li><li><a href="productos.html">Productos</a></li></ul>
+    </nav>
+  </header>
+
+  <main class="container" style="text-align:center;padding:80px 16px;">
+    <h1>¡Gracias por tu compra!</h1>
+    <p>Hemos recibido tu pedido y te hemos enviado un correo de confirmación (simulado).</p>
+    <p id="order-info" style="margin-top:12px;font-weight:700"></p>
+    <a class="btn primary" href="index.html">Volver al inicio</a>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-grid"><div class="footer-col"><h3>Contacto</h3><p>PoloNorte@example.com</p></div><div class="footer-col"><h3>Enlaces</h3></div><div class="footer-col"><h3>Síguenos</h3></div></div><div class="site-copy">© 2025 Polo Norte</div></footer>
+    <script>
+      (function(){
+        try{
+          const raw = localStorage.getItem('pagina3d_lastOrder');
+          if(!raw) return;
+          const order = JSON.parse(raw);
+          const info = document.getElementById('order-info');
+          if(info){
+            info.innerHTML = `Número de pedido: <span style="color:#ffb703">${order.id}</span> — Total: $${Number(order.total).toFixed(2)}`;
+          }
+          // opcional: limpiar el lastOrder tras mostrarlo para privacidad
+          // localStorage.removeItem('pagina3d_lastOrder');
+        }catch(e){ console.error(e); }
+      })();
+    </script>
+</body>
+</html>

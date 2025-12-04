@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Carrito - Página 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="brand-logo" aria-hidden="true"><img src="imagenes/images.jpeg" alt="Logo"></span>
+                <span class="brand-text">Página 3D</span>
+            </div>
+            <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="acerca.html">Acerca</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <button class="cart-toggle" aria-label="Ver carrito"><span class="cart-icon">🛒</span><span class="cart-count">0</span></button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Resumen del pedido</h1>
+        <section class="order-summary" aria-label="Resumen del pedido">
+            <div class="items"></div>
+            <div class="order-total">Total: $<span id="order-total">0.00</span></div>
+        </section>
+
+        <section class="checkout-form" style="margin-top:18px; max-width:700px;">
+            <h2>Datos de facturación</h2>
+            <form id="checkoutForm">
+                <label>Nombre completo
+                    <input type="text" name="name" required>
+                </label>
+                <label>Email
+                    <input type="email" name="email" required>
+                </label>
+                <label>Dirección
+                    <input type="text" name="address" required>
+                </label>
+                <label>Método de pago (simulado)
+                    <select name="payment">
+                        <option value="card">Tarjeta de crédito</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                </label>
+                <button class="boton" type="submit">Confirmar compra</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col"><h3>Contacto</h3><p>hola@pagina3d.example</p></div>
+            <div class="footer-col"><h3>Enlaces</h3><ul><li><a href="index.html">Inicio</a></li></ul></div>
+            <div class="footer-col"><h3>Síguenos</h3><p>Instagram · Twitter</p></div>
+        </div>
+        <div class="site-copy">© 2025 Página 3D</div>
+    </footer>
+
+    <script>
+    (function(){
+        const CART_KEY = 'pagina3d_cart_v1';
+        function readCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)) || []; }catch(e){return [];} }
+        function clearCart(){ localStorage.removeItem(CART_KEY); }
+
+        const itemsEl = document.querySelector('.order-summary .items');
+        const totalEl = document.getElementById('order-total');
+        function renderOrder(){
+            const cart = readCart();
+            itemsEl.innerHTML = '';
+            if(!cart.length){ itemsEl.innerHTML = '<div class="cart-empty">No hay items en el carrito.</div>'; totalEl.textContent = '0.00'; return; }
+            let total = 0;
+            cart.forEach(it=>{
+                const div = document.createElement('div'); div.className = 'order-item';
+                div.innerHTML = `<img src="${it.image||'imagenes/images.jpeg'}" alt="${it.name}"><div class="order-item-info"><strong>${it.name}</strong><div>$${Number(it.price).toFixed(2)} x ${it.qty}</div></div>`;
+                itemsEl.appendChild(div);
+                total += Number(it.price) * it.qty;
+            });
+            totalEl.textContent = total.toFixed(2);
+        }
+        renderOrder();
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                name: form.name.value.trim(),
+                email: form.email.value.trim(),
+                address: form.address.value.trim(),
+                payment: form.payment.value,
+                cart: readCart()
+            };
+            if(!data.cart.length){ alert('El carrito está vacío. Añade productos antes de pagar.'); return; }
+            // Simular procesamiento
+            const btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Procesando...';
+            setTimeout(()=>{
+                // Generar un ID de pedido único y guardarlo junto con los datos del pedido
+                const orderId = (function(){
+                    const d = new Date();
+                    const date = d.getFullYear().toString() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+                    const rand = Math.floor(Math.random()*90000)+10000; // 5 dígitos
+                    return `P3D-${date}-${rand}`;
+                })();
+                const cartData = readCart();
+                const total = cartData.reduce((s,i)=> s + (i.qty * Number(i.price)), 0);
+                const order = {
+                    id: orderId,
+                    name: data.name,
+                    email: data.email,
+                    address: data.address,
+                    payment: data.payment,
+                    cart: cartData,
+                    total: total,
+                    createdAt: new Date().toISOString()
+                };
+                try { localStorage.setItem('pagina3d_lastOrder', JSON.stringify(order)); } catch(e) {}
+                // Aquí se 'confirma' la compra: limpiar carrito y redirigir a gracias
+                clearCart();
+                window.location.href = 'gracias.html';
+            }, 1400);
+        });
+
+        // actualiza contador en header si existe
+        const countEls = document.querySelectorAll('.cart-count');
+        function updateCounts(){ const cart = readCart(); const count = cart.reduce((s,i)=>s+(i.qty||0),0); countEls.forEach(el=>el.textContent = count); }
+        updateCounts();
+    })();
+    </script>
+    <script src="javaScript.js" defer></script>
+</body>
+</html>
